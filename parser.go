@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
-	"path"
 	"path/filepath"
 	"reflect"
 	"sort"
@@ -123,10 +122,7 @@ func (parser *Parser) ParseAPI(searchDir string, mainAPIFile string) error {
 	}
 
 	if parser.ParseDependency {
-		pkgName, err := getPkgName(path.Dir(absMainAPIFilePath))
-		if err != nil {
-			return err
-		}
+		pkgName := "git.dustess.com/mk-base/gin-ext/api"
 		if err := t.Resolve(pkgName); err != nil {
 			return fmt.Errorf("pkg %s cannot find all dependencies, %s", pkgName, err)
 		}
